@@ -16,7 +16,7 @@ def enable_user(name, username):
                                                    'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
                                                    'DefaultDomainName')
 
-    computer_name = __salt__['win_system.get_computer_name']()
+    computer_name = __salt__['system.get_computer_name']()
 
     if auto_admin_logon == str(1) \
             and default_user == username \
