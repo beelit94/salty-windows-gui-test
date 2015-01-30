@@ -6,11 +6,25 @@ def enable_user(name, username):
 
     # todo check user name is not in the list
 
-    key = __salt__['reg.read_key']('HKEY_LOCAL_MACHINE',
-                                   'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
-                                   'AutoAdminLogon')
+    auto_admin_logon = __salt__['reg.read_key']('HKEY_LOCAL_MACHINE',
+                                                'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                                'AutoAdminLogon')
+    default_user = __salt__['reg.read_key']('HKEY_LOCAL_MACHINE',
+                                            'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                            'DefaultUserName')
+    default_domain_name = __salt__['reg.read_key']('HKEY_LOCAL_MACHINE',
+                                                   'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                                   'DefaultDomainName')
 
-    ret['key'] = key
+    if auto_admin_logon == str(1) and default_user == username:
+        ret['result'] = True
+        ret['comment'] = 'System already in the correct state'
+        return ret
+
+    # default_password = __salt__['reg.read_key']('HKEY_LOCAL_MACHINE',
+    #                                             'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+    #                                             'DefaultPassword')
+
 
     ret['changes'] = {
         'old': 'current_state',
@@ -18,6 +32,6 @@ def enable_user(name, username):
     }
 
     ret['result'] = True
-    ret['comment'] = 'ke: ' + str(key)
+    ret['comment'] = 'auto logon '
 
     return ret
