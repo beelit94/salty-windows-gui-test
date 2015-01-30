@@ -16,7 +16,11 @@ def enable_user(name, username):
                                                    'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
                                                    'DefaultDomainName')
 
-    if auto_admin_logon == str(1) and default_user == username:
+    computer_name = __salt__['win_system.get_computer_name']()
+
+    if auto_admin_logon == str(1) \
+            and default_user == username \
+            and default_domain_name == computer_name:
         ret['result'] = True
         ret['comment'] = 'System already in the correct state'
         return ret
@@ -26,12 +30,12 @@ def enable_user(name, username):
     #                                             'DefaultPassword')
 
 
-    ret['changes'] = {
-        'old': 'current_state',
-        'new': 'new_state',
-    }
+    # ret['changes'] = {
+    #     'old': 'current_state',
+    #     'new': 'new_state',
+    # }
 
-    ret['result'] = True
-    ret['comment'] = 'auto logon '
+    ret['result'] = False
+    ret['comment'] = 'Not in right state'
 
     return ret
