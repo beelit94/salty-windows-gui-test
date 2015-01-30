@@ -11,4 +11,4 @@ msinstaller:
   user.present:
     - password: msiinstaller
     - group:
-      - administrators
+      - Administrators
