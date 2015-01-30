@@ -1,8 +1,8 @@
 import salt.exceptions
 
 
-def enable_user(username):
-    ret = {'username': username, 'changes': {}, 'result': False, 'comment': '', 'key': ''}
+def enable_user(name, username):
+    ret = {'name': name, 'changes': {}, 'result': False, 'comment': '', 'key': ''}
 
     # todo check user name is not in the list
 
