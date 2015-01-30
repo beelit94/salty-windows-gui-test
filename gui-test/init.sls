@@ -10,3 +10,5 @@ auto_logon:
 msinstaller:
   user.present:
     - password: msiinstaller
+    - group:
+      - administrators
