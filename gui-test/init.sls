@@ -1,5 +1,5 @@
 {% set username = 'msinstaller' %}
-{% set password = 'th@UYe4eZ' %}
+{% set password = 'win9@fanbiejap' %}
 
 c:\disconnectRDP.cmd:
   file.managed:
@@ -12,7 +12,8 @@ auto_logon:
     - password: {{ password }}
 
 {{ username }}:
-  user.present:
+  module.run:
+    - name: user.add
     - password: {{ password }}
     - description: 'test account for msi installer'
     - pwneverexpires: True
@@ -27,3 +28,5 @@ power_cfg:
 jenkins_swarm_plugin:
   cmd.run:
     - name: 'SCHTASKS /Create /SC ONLOGON /TN jenkins /TR "java -jar c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar -executors 1 -master http://10.140.28.218:8080" /RU {{ username }} /RP {{ password }} /RL HIGHEST /IT /F'
+    - watch:
+      - autologon: auto_logon
