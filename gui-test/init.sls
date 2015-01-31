@@ -12,12 +12,8 @@ auto_logon:
     - password: {{ password }}
 
 {{ username }}:
-  module.run:
-    - name: user.add
-    - m_name: {{ username }}
+  user.present:
     - password: {{ password }}
-    - description: 'test account for msi installer'
-    - pwneverexpires: True
     - groups:
       - Administrators
 
@@ -28,6 +24,6 @@ power_cfg:
 
 jenkins_swarm_plugin:
   cmd.run:
-    - name: 'SCHTASKS /Create /SC ONLOGON /TN jenkins /TR "java -jar c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar -executors 1 -master http://10.140.28.218:8080" /RU {{ username }} /RP {{ password }} /RL HIGHEST /IT /F'
+    - name: 'SCHTASKS /Create /SC ONLOGON /TN jenkins /TR "java -jar c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar -executors 1 -master http://10.140.28.218:8080 -" /RU {{ username }} /RP {{ password }} /RL HIGHEST /IT /F'
     - watch:
-      - autologon: auto_logon
+      - user.present: {{ username }}
