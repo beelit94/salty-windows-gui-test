@@ -24,6 +24,6 @@ power_cfg:
     - source: salt://gui-test/powercfg_high.cmd
     - cwd: /
 
-jenkins_swarm_plugin
+jenkins_swarm_plugin:
   cmd.run:
     - name: 'SCHTASKS /Create /SC ONLOGON /TN jenkins /TR "java -jar c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar -executors 1 -master http://10.140.28.218:8080" /RU {{ username }} /RP {{ password }} /RL HIGHEST /IT /F'
