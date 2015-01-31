@@ -1,5 +1,5 @@
 {% set username = msinstaller %}
-{% set password = th@UYe4eZ %}
+{% set password = 'th@UYe4eZ' %}
 
 c:\disconnectRDP.cmd:
   file.managed:
