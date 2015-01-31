@@ -14,6 +14,7 @@ auto_logon:
 {{ username }}:
   module.run:
     - name: user.add
+    - m_name: {{ username }}
     - password: {{ password }}
     - description: 'test account for msi installer'
     - pwneverexpires: True
