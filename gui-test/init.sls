@@ -7,7 +7,8 @@ auto_logon:
     - enable_user
     - username: eserv
 
-'cn=msinstaller,cn=Administrator':
+msinstaller:
   user.present:
     - password: msiinstaller
-    
+    - groups:
+      - Administrators
