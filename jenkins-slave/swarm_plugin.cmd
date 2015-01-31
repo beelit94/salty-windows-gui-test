@@ -1,0 +1,1 @@
+java -jar swarm-client-1.22-jar-with-dependencies.jar -executors 1 -autoDiscoveryAddress 10.140.28.218
