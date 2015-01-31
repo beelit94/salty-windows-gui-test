@@ -27,21 +27,21 @@ def enable_user(name, username, password):
     log.info('original DefaultPassword: %s' % default_password)
     computer_name = __salt__['system.get_computer_name']()
 
-    if auto_admin_logon == str(1) \
-            and default_user == username \
-            and default_domain_name == computer_name \
-            and default_password is False:
-        ret['result'] = True
-        ret['comment'] = 'System already in the correct state'
-        return ret
+    # if auto_admin_logon == str(1) \
+    #         and default_user == username \
+    #         and default_domain_name == computer_name \
+    #         and default_password is False:
+    #     ret['result'] = True
+    #     ret['comment'] = 'System already in the correct state'
+    #     return ret
 
-    if auto_admin_logon == str(1) \
-            and default_user == username \
-            and default_domain_name == computer_name \
-            and default_password == password:
-        ret['result'] = True
-        ret['comment'] = 'auto logon for %s is set, need to reboot' % username
-        return ret
+    # if auto_admin_logon == str(1) \
+    #         and default_user == username \
+    #         and default_domain_name == computer_name \
+    #         and default_password == password:
+    #     ret['result'] = True
+    #     ret['comment'] = 'auto logon for %s is set, need to reboot' % username
+    #     return ret
 
     # auto admin logon key
     # not exist, the create key module will set key instead fo create key
