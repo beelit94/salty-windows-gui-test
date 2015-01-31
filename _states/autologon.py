@@ -47,28 +47,28 @@ def enable_user(name, username, password):
     # not exist, the create key module will set key instead fo create key
     # if a key is already exist
     try:
-        result = __salt__['reg.create_key']('HKEY_LOCAL_MACHINE',
-                                            'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
-                                            'AutoAdminLogon',
-                                            '1')
+        result = __salt__['reg.set_key']('HKEY_LOCAL_MACHINE',
+                                         'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                         'AutoAdminLogon',
+                                         '1', 'REG_SZ')
         log.info('AutoAdminLogon created' + str(result))
 
-        result = __salt__['reg.create_key']('HKEY_LOCAL_MACHINE',
-                                   'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
-                                   'DefaultUserName',
-                                   username)
+        result = __salt__['reg.set_key']('HKEY_LOCAL_MACHINE',
+                                         'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                         'DefaultUserName',
+                                         username, 'REG_SZ')
         log.info('DefaultUserName' + str(result))
 
-        result = __salt__['reg.create_key']('HKEY_LOCAL_MACHINE',
-                                   'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
-                                   'DefaultDomainName',
-                                   computer_name)
+        result = __salt__['reg.set_key']('HKEY_LOCAL_MACHINE',
+                                         'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                         'DefaultDomainName',
+                                         computer_name, 'REG_SZ')
         log.info('DefaultDomainName' + str(result))
 
-        result = __salt__['reg.create_key']('HKEY_LOCAL_MACHINE',
-                                   'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
-                                   'DefaultPassword',
-                                   password)
+        result = __salt__['reg.set_key']('HKEY_LOCAL_MACHINE',
+                                         'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon',
+                                         'DefaultPassword',
+                                         password, 'REG_SZ')
         log.info('DefaultPassword' + str(result))
 
     except Exception as err:
