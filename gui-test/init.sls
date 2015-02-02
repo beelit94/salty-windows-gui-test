@@ -41,7 +41,7 @@ turn_off_uac:
     - hkey: 'HKEY_LOCAL_MACHINE'
     - path: 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
     - key: 'EnableLUA'
-    - value: '0'
+    - value: 0
     - vtype: 'REG_DWORD'
 
 power_cfg:
