@@ -13,11 +13,6 @@ def add_event(name, username, password, jenkins_master, jenkins_jar, jenkins_sla
 
     result = __salt__['cmd.run'](cmd)
 
-    if result:
-        ret['result'] = True
-        ret['comment'] = 'event added'
-    else:
-        ret['result'] = False
-        ret['comment'] = 'ERROR'
-
+    ret['result'] = result['result']
+    ret['comment'] = result['comment']
     return ret
