@@ -31,8 +31,8 @@ change_pwd_bug:
 
 # another bug for this
 change_pwd_never_bug:
-  module.run:
-    - name: user.passwordneverexpires
+  cmd.run:
+    - name: WMIC USERACCOUNT WHERE Name={{ username }} SET PasswordExpires=FALSE
     - m_name: {{ username }}
 
 turn_off_uac:
