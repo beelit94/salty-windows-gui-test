@@ -20,6 +20,15 @@ auto_logon:
     - groups:
       - Administrators
 
+# since user prsent got bug for password, change password after set account
+change_pwd_bug:
+  module.run:
+    - name: user.setpassword
+    - m_name: {{ username }}
+    - password: {{ password }}
+    - watch:
+      - user: {{ username }}
+
 power_cfg:
   cmd.script:
     - source: salt://gui-test/powercfg_high.cmd
@@ -31,7 +40,8 @@ jenkins_plugin:
     - username: {{ username }}
     - password: {{ password }}
     - jenkins_master: 'http://10.140.28.218:8080/'
-    - jenkins_jar: 'c:\\jenkins\\swarm-client-1.22-jar-with-dependencies.jar'
+    - jenkins_jar: 'c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar'
     - jenkins_slave_labels: {{ os_family }}{{ osrelease }}{{ cpuarch }}
     - watch:
       - user: {{ username }}
+      - module: change_pwd_bug
