@@ -36,13 +36,13 @@ def add_event(name, username, password, jenkins_master, jenkins_jar):
     ver = StrictVersion(ver_str)
     win_full_version = ''
     if 'Server' in platform.release():
-        for win_key, win_value in windows_server_versions:
-            if ver == StrictVersion(win_value):
-                win_full_version = win_key
+        for key in windows_server_versions:
+            if ver == StrictVersion(windows_server_versions[key]):
+                win_full_version = key
     else:
-        for win_key, win_value in windows_versions:
-            if ver == StrictVersion(win_value):
-                win_full_version = win_key
+        for key in windows_versions:
+            if ver == StrictVersion(windows_versions[key]):
+                win_full_version = key
     jenkins_labels = win_full_version + get_os_arch()
 
     task_name = 'jenkins'
