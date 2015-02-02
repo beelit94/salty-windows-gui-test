@@ -34,11 +34,11 @@ def enable_user(name, username, password):
 
     user_list = __salt__['user.list_users']()
     log.info('user list:' + str(user_list))
-    if default_user not in user_list:
-        result = _set_winlogon_key('AutoAdminLogon', '0')
-        ret['result'] = False
-        ret['comment'] = '%s is not exist' % default_user
-        return ret
+    # if default_user not in user_list:
+    #     result = _set_winlogon_key('AutoAdminLogon', '0')
+    #     ret['result'] = False
+    #     ret['comment'] = '%s is not exist' % default_user
+    #     return ret
 
     # auto admin logon key
     # not exist, the create key module will set key instead fo create key

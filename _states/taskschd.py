@@ -19,3 +19,5 @@ def add_event(name, username, password, jenkins_master, jenkins_jar, jenkins_sla
     else:
         ret['result'] = False
         ret['comment'] = 'ERROR'
+
+    return ret
