@@ -32,7 +32,7 @@ change_pwd_bug:
 # another bug for this
 change_pwd_never_bug:
   cmd.run:
-    - name: WMIC USERACCOUNT WHERE Name={{ username }} SET PasswordExpires=FALSE
+    - name: WMIC USERACCOUNT WHERE "'Name={{ username }}'" SET PasswordExpires=FALSE
     - m_name: {{ username }}
 
 turn_off_uac:
