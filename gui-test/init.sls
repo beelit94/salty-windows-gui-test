@@ -8,6 +8,10 @@ c:\disconnectRDP.cmd:
   file.managed:
      - source: salt://gui-test/disconnectRDP.cmd
 
+c:\Users\{{ username }}\Desktop\disconnectRDP.cmd:
+  file.managed:
+     - source: salt://gui-test/disconnectRDP.cmd
+
 auto_logon:
   autologon:
     - enable_user
@@ -29,7 +33,7 @@ change_pwd_bug:
     - watch:
       - user: {{ username }}
 
-# another bug for this
+# another bug for user present
 change_pwd_never_bug:
   cmd.run:
     - name: WMIC USERACCOUNT WHERE "Name='{{ username }}'" SET PasswordExpires=FALSE
@@ -56,7 +60,6 @@ jenkins_plugin:
     - password: {{ password }}
     - jenkins_master: 'http://10.140.28.218:8080/'
     - jenkins_jar: 'c:\jenkins\swarm-client-1.22-jar-with-dependencies.jar'
-    - jenkins_slave_labels: {{ os_family }}{{ osrelease }}{{ cpuarch }}
     - watch:
       - user: {{ username }}
       - module: change_pwd_bug
