@@ -29,6 +29,21 @@ change_pwd_bug:
     - watch:
       - user: {{ username }}
 
+# another bug for this
+change_pwd_never_bug:
+  module.run:
+    - name: user.passwordneverexpires
+    - m_name: {{ username }}
+
+turn_off_uac:
+  module.run:
+    - name: reg.set_key
+    - hkey: 'HKEY_LOCAL_MACHINE'
+    - path: 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+    - key: 'EnableLUA'
+    - value: '0'
+    - vtype: 'REG_DWORD'
+
 power_cfg:
   cmd.script:
     - source: salt://gui-test/powercfg_high.cmd
