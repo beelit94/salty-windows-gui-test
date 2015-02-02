@@ -11,8 +11,13 @@ def add_event(name, username, password, jenkins_master, jenkins_jar, jenkins_sla
     cmd = 'SCHTASKS /Create /SC ONLOGON /RL HIGHEST /IT /F /TN %s /TR %s /RU %s /RP %s ' % \
           (task_name, task_run_cmd, username, password)
 
-    result = __salt__['cmd.run'](cmd)
+    cmd_result = __salt__['cmd.run_all'](cmd)
 
-    ret['result'] = result['result']
-    ret['comment'] = result['comment']
+    if cmd_result['retcode'] != 0:
+        ret['result'] = False
+        ret['comment'] = cmd_result['stderr'] + cmd_result['stdout']
+        return ret
+
+    ret['result'] = True
+    ret['comment'] = cmd_result['stdout']
     return ret
