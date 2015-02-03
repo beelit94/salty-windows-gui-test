@@ -73,6 +73,7 @@ def add_event(name, username, password, jenkins_master, jenkins_jar):
             if ver == StrictVersion(windows_versions[key]):
                 win_full_version = key
     jenkins_labels = win_full_version + get_os_arch()
+    jenkins_labels = str.lower(jenkins_labels)
 
     task_name = 'jenkins'
     jenkins_folder = 'c:\\jenkins'
