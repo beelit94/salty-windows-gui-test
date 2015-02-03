@@ -37,7 +37,6 @@ change_pwd_bug:
 change_pwd_never_bug:
   cmd.run:
     - name: WMIC USERACCOUNT WHERE "Name='{{ username }}'" SET PasswordExpires=FALSE
-    - m_name: {{ username }}
 
 turn_off_uac:
   module.run:
@@ -63,3 +62,38 @@ jenkins_plugin:
     - watch:
       - user: {{ username }}
       - module: change_pwd_bug
+
+# pkg
+pyteest:
+  pip.installed:
+    - name: pytest
+
+
+#C:\pywinauto-0.4.2.zip:
+#  file.managed:
+#    - source: salt://gui-test/pywinauto-0.4.2.zip
+#
+#C:\SendKeys-0.3_py27.exe:
+#  file.managed:
+#    - source: salt://gui-test/SendKeys-0.3_py27.exe
+#
+#C:\PIL-1.1.7.win32-py2.7.exe:
+#  file.managed:
+#    - source: salt://gui-test/PIL-1.1.7.win32-py2.7.exe
+#
+#easy_install_autoit:
+#  cmd.run:
+#    - name: C:\tools\python2-x86_32\Scripts\easy_install.exe pywinauto-0.4.2.zip
+#    - watch:
+#      - file: C:\pywinauto-0.4.2.zip
+#
+#easy_install_pil:
+#  cmd.run:
+#    - name: C:\tools\python2-x86_32\Scripts\easy_install.exe PIL-1.1.7.win32-py2.7.exe
+#    - watch:
+#      - file: C:\pywinauto-0.4.2.zip
+
+
+# python path
+'C:\tools\python2-x86_32\Scripts':
+  win_path.exists
