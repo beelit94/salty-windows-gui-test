@@ -34,6 +34,9 @@ change_pwd_bug:
 change_pwd_never_bug:
   cmd.run:
     - name: WMIC USERACCOUNT WHERE "Name='{{ username }}'" SET PasswordExpires=FALSE
+    - watch:
+      - user: {{ username }}
+
 
 turn_off_uac:
   module.run:
